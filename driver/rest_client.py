@@ -37,7 +37,19 @@ class RestClient():
         self.api_timeout=timeout
 
 
-    def post_request(self, url):
+    def get_request(self, url):
+        """
+            This method manage get requests
+            and manage posible exceptions on reponse
+
+            Args:
+                url(String): url to sen request
+            Returns:
+                resquest(Requests)
+            Exceptions:
+                RequestFailureException: By timeout or conection error
+                UnknownResultException: By read timeout or json data invalid
+        """
 
         url = urljoin(self.base_url, url)
 
@@ -56,10 +68,8 @@ class RestClient():
         ) as exc:
             self.logger.error(
                 'Could not connect to Drivers API',
-                exec_info=True,
                 extra={
                     'url':url,
-                    'payload':data,
                     'api_timeout':self.api_timeout
                 },
             )
@@ -67,8 +77,7 @@ class RestClient():
             raise RequestFailureException(url=url) from exc
         except requests.exceptions.ReadTimeout as exc:
             self.logger.error(
-                'Read tiem out to Drivers API',
-                exec_info=True,
+                'Read time out to Drivers API',
                 extra={
                     'url':url,
                     'api_timeout':self.api_timeout
@@ -81,18 +90,24 @@ class RestClient():
         except ValueError as exc:
             self.logger.error(
                 'Invalid JSON data Drivers API',
-                exec_info=True,
                 extra={
                     'url':url,
                     'response_status_code':post_response.status_code,
                     'response_content_truncated':post_response.content[:1024]
                 },
             )
+            raise UnknownResultException(url=url) from exc
 
         return post_response
 
     def get_drivers(self):
-        return self.post_request(
+        """
+            Send request to get Driver list
+
+            Returns:
+                resquest(Requests)
+        """
+        return self.get_request(
             self.GET_DRIVERS
         )
         
