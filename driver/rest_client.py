@@ -1,5 +1,3 @@
-from asyncio.log import logger
-from urllib import request
 import requests
 import logging
 

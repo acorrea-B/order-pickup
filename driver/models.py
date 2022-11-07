@@ -1,4 +1,3 @@
-from django.utils import timezone
 from django.db import models
 
 class Driver(models.Model):
@@ -20,12 +19,7 @@ class Driver(models.Model):
         null=True,
         help_text = "location longitude Driver"
     )
-    last_update = models.DateTimeField()
+    last_update = models.DateTimeField(auto_now_add=True)
 
-class DriverRequestLog(models.Model):
-    creation_date = models.DateTimeField(
-        default=timezone.now
-    )
-    response = models.JSONField()
-    
+
     
