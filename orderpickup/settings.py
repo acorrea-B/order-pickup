@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cassette_django',
     'driver',
 
 ]
@@ -49,9 +48,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'cassette_django.middleware.CassetteMiddleware',
-
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'orderpickup.urls'
@@ -74,6 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'orderpickup.wsgi.application'
 
+TEST_RUNNER = 'orderpickup.testing.DirBasedTestRunner'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -128,6 +126,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DRIVERS_API_CONFIG = {
-    'url':'https://gist.github.com/',
-    'timeout':15
+    'URL':'https://gist.github.com/',
+    'TIMEOUT':15
 }

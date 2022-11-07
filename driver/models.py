@@ -1,4 +1,3 @@
-from urllib import response
 from django.utils import timezone
 from django.db import models
 
@@ -25,7 +24,7 @@ class Driver(models.Model):
 
 class DriverRequestLog(models.Model):
     creation_date = models.DateTimeField(
-        default=timezone.now()
+        default=timezone.now
     )
     response = models.JSONField()
     

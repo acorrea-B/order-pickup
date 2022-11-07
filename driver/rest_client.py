@@ -29,7 +29,7 @@ class UnknownResultException(Exception):
 
 class RestClient():
 
-    GET_DRIVERS = "jeithc/96681e4ac7e2b99cfe9a08ebc093787c"
+    GET_DRIVERS = "jeithc/96681e4ac7e2b99cfe9a08ebc093787c/raw/632ca4fc3ffe77b558f467beee66f10470649bb4/points.json"
 
     def __init__(self, base_url, timeout=10):
         self.logger = logging.getLogger(__name__)
@@ -37,20 +37,18 @@ class RestClient():
         self.api_timeout=timeout
 
 
-    def post_request(self, url, data):
+    def post_request(self, url):
 
-        url = urljoin(self.self.base_url, url)
+        url = urljoin(self.base_url, url)
 
         headers = {
             'Content-Type': 'application/json'
         }
 
         try:
-            post_response = requests.post(
+            post_response = requests.get(
                 url,
                 headers=headers,
-                json=data,
-                timeout=int(self.api_timeout)
             )
         except (
             requests.exceptions.ConnectionError,
@@ -73,13 +71,11 @@ class RestClient():
                 exec_info=True,
                 extra={
                     'url':url,
-                    'payload':data,
                     'api_timeout':self.api_timeout
                 },
             )
 
             raise UnknownResultException(url=url) from exc
-
         try:
             json_response = post_response.json()
         except ValueError as exc:
@@ -88,7 +84,6 @@ class RestClient():
                 exec_info=True,
                 extra={
                     'url':url,
-                    'payload':data,
                     'response_status_code':post_response.status_code,
                     'response_content_truncated':post_response.content[:1024]
                 },
@@ -98,7 +93,6 @@ class RestClient():
 
     def get_drivers(self):
         return self.post_request(
-            self.GET_DRIVERS,
-            {}
+            self.GET_DRIVERS
         )
         
