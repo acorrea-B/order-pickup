@@ -47,6 +47,22 @@ services:
       - db
       - redis
       - web
+  
+  celery_beat:
+    build: .
+    command:  celery -A orderpickup beat -s /tmp/celerybeat-schedule
+    volumes:
+      - .:/order_pickup
+    environment:
+      - DB_HOST=db
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASS=postgres
+    depends_on:
+      - db
+      - redis
+      - web
+  
 
 volumes:
   postgres_data:

@@ -1,7 +1,7 @@
-from orderpickup.celery import app
+from celery import shared_task
 from driver.services import DriverService
 
-@app.task
+@shared_task(name = "get_drivers_task")
 def get_drivers_task():
     """
         Periodic task that gets a list updated
