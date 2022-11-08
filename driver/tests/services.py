@@ -1,4 +1,5 @@
 import datetime
+from django.utils import timezone
 import requests_mock
 
 from unittest import TestCase
@@ -11,13 +12,14 @@ def generate_drivers():
         Driver.objects.create(
             lat=0,
             lng=0,
-            last_update=datetime.timezone.utc
+            last_update=timezone.now()
         )
 
 class ServicesTestCase(TestCase):
 
     @vcr.use_cassette()
     def test_create_drivers(self):
+        date = "2021-12-10T00:00:00.000Z"
         Driver.objects.all().delete()
         self.assertEquals(
             0,
@@ -32,6 +34,10 @@ class ServicesTestCase(TestCase):
         self.assertIsNotNone(driver.lng)
         self.assertIsNotNone(driver.lat)
         self.assertIsNotNone(driver.last_update)
+        self.assertEquals(
+            driver.last_update,
+            datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f%z'),
+        )
     
     @vcr.use_cassette()
     def test_update_drivers(self):
@@ -87,4 +93,78 @@ class ServicesTestCase(TestCase):
             0,
             Driver.objects.count()
         )
+
+    @vcr.use_cassette()
+    def test_get_nearest_driver_with_existent_date(self):
+        date = "2021-12-10T00:00:00.000Z"
+        DriverService().update_or_create_drivers()
+
+        number_drivers_by_date = Driver.objects.filter(
+            last_update=date
+        )
+        result = DriverService().get_nearest_driver(
+            6,7,
+            10,15,
+            date
+        )
+        radius = DriverService().point_distance(
+            6,7,
+            10,15,
+        )
+        self.assertGreater(
+            result.count(),
+            2
+        )
+        self.assertNotEquals(
+            result.count(),
+            number_drivers_by_date.count()
+        )
+        self.assertLess(
+            result.count(),
+            number_drivers_by_date.count()
+        )
+
+        for item in result:
+            self.assertLessEqual(
+                item.lat,
+                radius
+            )
+            self.assertLessEqual(
+                item.lng,
+                radius
+            )
+            self.assertEquals(
+                datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f%z'),
+                item.last_update
+            )
+    
+    def test_get_nearest_driver_with_no_existent_date(self):
+        date = "2021-12-11T00:00:00.000Z"
+        number_drivers_by_date = Driver.objects.filter(
+            last_update=date
+        )
+        result = DriverService().get_nearest_driver(
+            1,2,
+            9,8,
+            date
+        )
+        
+        self.assertEqual(
+            result.count(),
+            number_drivers_by_date.count()
+        )
+    
+    def test_get_nearest_driver_with_no_near_drivers(self):
+        date = "2021-12-11T00:00:00.000Z"
+        result = DriverService().get_nearest_driver(
+            100,100,
+            9,8,
+            date
+        )
+        
+        self.assertEqual(
+            result.count(),
+            0
+        )
+
         

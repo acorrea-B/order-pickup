@@ -1,0 +1,134 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://gist.github.com/jeithc/96681e4ac7e2b99cfe9a08ebc093787c/raw/632ca4fc3ffe77b558f467beee66f10470649bb4/points.json
+  response:
+    body:
+      string: ''
+    headers:
+      Content-Length:
+      - '0'
+      Location:
+      - https://gist.githubusercontent.com/jeithc/96681e4ac7e2b99cfe9a08ebc093787c/raw/632ca4fc3ffe77b558f467beee66f10470649bb4/points.json
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.1
+    method: GET
+    uri: https://gist.githubusercontent.com/jeithc/96681e4ac7e2b99cfe9a08ebc093787c/raw/632ca4fc3ffe77b558f467beee66f10470649bb4/points.json
+  response:
+    body:
+      string: "{\n    \"alfreds\": [\n        {\n            \"id\": 1,\n            \"lat\":
+        \"1\",\n            \"lng\": \"5\",\n            \"lastUpdate\": \"2021-12-10T00:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 2,\n            \"lat\": \"2\",\n
+        \           \"lng\": \"6\",\n            \"lastUpdate\": \"2021-12-10T00:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 3,\n            \"lat\": \"3\",\n
+        \           \"lng\": \"7\",\n            \"lastUpdate\": \"2021-12-10T00:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 4,\n            \"lat\": \"4\",\n
+        \           \"lng\": \"8\",\n            \"lastUpdate\": \"2021-12-10T00:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 5,\n            \"lat\": \"5\",\n
+        \           \"lng\": \"9\",\n            \"lastUpdate\": \"2021-12-10T00:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 6,\n            \"lat\": \"6\",\n
+        \           \"lng\": \"10\",\n            \"lastUpdate\": \"2021-12-10T00:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 7,\n            \"lat\": \"7\",\n
+        \           \"lng\": \"11\",\n            \"lastUpdate\": \"2021-12-10T00:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 8,\n            \"lat\": \"8\",\n
+        \           \"lng\": \"12\",\n            \"lastUpdate\": \"2021-12-10T00:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 9,\n            \"lat\": \"9\",\n
+        \           \"lng\": \"13\",\n            \"lastUpdate\": \"2021-12-10T00:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 10,\n            \"lat\": \"10\",\n
+        \           \"lng\": \"14\",\n            \"lastUpdate\": \"2021-12-10T00:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 11,\n            \"lat\": \"11\",\n
+        \           \"lng\": \"15\",\n            \"lastUpdate\": \"2021-12-10T00:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 12,\n            \"lat\": \"12\",\n
+        \           \"lng\": \"16\",\n            \"lastUpdate\": \"2021-12-10T00:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 13,\n            \"lat\": \"13\",\n
+        \           \"lng\":\"50\",\n            \"lastUpdate\": \"2021-12-10T10:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 14,\n            \"lat\": \"50\",\n
+        \           \"lng\":\"50\",\n            \"lastUpdate\": \"2021-12-10T10:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 15,\n            \"lat\": \"60\",\n
+        \           \"lng\":\"20\",\n            \"lastUpdate\": \"2021-12-10T10:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 16,\n            \"lat\": \"70\",\n
+        \           \"lng\":\"10\",\n            \"lastUpdate\": \"2021-12-10T10:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 17,\n            \"lat\": \"40\",\n
+        \           \"lng\":\"40\",\n            \"lastUpdate\": \"2021-12-10T10:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 18,\n            \"lat\": \"30\",\n
+        \           \"lng\":\"30\",\n            \"lastUpdate\": \"2021-12-10T10:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 19,\n            \"lat\": \"20\",\n
+        \           \"lng\":\"5\",\n            \"lastUpdate\": \"2021-12-10T10:00:00.000Z\"\n
+        \       },\n        {\n            \"id\": 20,\n            \"lat\": \"50\",\n
+        \           \"lng\":\"3\",\n            \"lastUpdate\": \"2021-12-10T10:00:00.000Z\"\n
+        \       }\n    ]\n\t\n}"
+    headers:
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Origin:
+      - '*'
+      Cache-Control:
+      - max-age=300
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2914'
+      Content-Security-Policy:
+      - default-src 'none'; style-src 'unsafe-inline'; sandbox
+      Content-Type:
+      - text/plain; charset=utf-8
+      Date:
+      - Tue, 08 Nov 2022 21:51:16 GMT
+      ETag:
+      - W/"871194ef26f1c2bf7631d57c2488814ed31fe0f7be58b05e9024ffa51452f605"
+      Expires:
+      - Tue, 08 Nov 2022 21:56:16 GMT
+      Source-Age:
+      - '152'
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Authorization,Accept-Encoding,Origin
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - HIT
+      X-Cache-Hits:
+      - '1'
+      X-Content-Type-Options:
+      - nosniff
+      X-Fastly-Request-ID:
+      - 9feb06cb2215b558ca681551a118b655d897138c
+      X-Frame-Options:
+      - deny
+      X-GitHub-Request-Id:
+      - 405C:7AC8:15FF92:20D22B:636ACBAD
+      X-Served-By:
+      - cache-bog2260029-BOG
+      X-Timer:
+      - S1667944277.591309,VS0,VE0
+      X-XSS-Protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

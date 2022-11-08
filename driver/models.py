@@ -19,7 +19,7 @@ class Driver(models.Model):
         null=True,
         help_text = "location longitude Driver"
     )
-    last_update = models.DateTimeField(auto_now_add=True)
+    last_update = models.DateTimeField()
 
 
     
