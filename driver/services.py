@@ -1,4 +1,5 @@
-from urllib import response
+import logging
+
 from django.conf import settings
 from driver.rest_client import RestClient
 from driver.models import Driver
@@ -6,6 +7,7 @@ from driver.models import Driver
 class DriverService():
     def __init__(self):
         api_config = settings.DRIVERS_API_CONFIG
+        self.logger = logging.getLogger(__name__)
         self.client = RestClient(
             base_url=api_config.get('URL', ''),
             timeout=api_config.get('TIMEOUT', 10)

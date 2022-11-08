@@ -1,11 +1,52 @@
 version: '3'
 
-services:
+services:  
   web:
     build: .
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python manage.py makemigrations
+                      && python manage.py migrate && 
+                      python manage.py runserver 0.0.0.0:8000"
     container_name: order_pickup
     volumes:
       - .:/order_pickup
     ports:
       - "8000:8000"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASS=postgres
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+  
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  celery:
+    restart: always
+    build: .
+    command: celery -A orderpickup worker -l info
+    volumes:
+      - .:/order_pickup
+    environment:
+      - DB_HOST=db
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASS=postgres
+    depends_on:
+      - db
+      - redis
+      - web
+
+volumes:
+  postgres_data:

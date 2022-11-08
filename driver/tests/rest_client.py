@@ -91,26 +91,6 @@ class DriversTestCase(TestCase):
         
         self.assertIsNone(ctx.exception.response)
         self.assertIn(
-            'Read tiem out to Drivers API',
-            cm.output[0].split('\\n')[0]
-        )
-    
-    @requests_mock.Mocker(real_http=True)
-    def test_read_timeout_get_drivers(self, mock):
-        mocked_url = 'https://gist.githubusercontent.com/jeithc/96681e4ac7e2b99cfe9a08ebc093787c/raw/632ca4fc3ffe77b558f467beee66f10470649bb4/points.json'
-        mock.get(
-            mocked_url,
-            exc=requests.exceptions.ReadTimeout
-        )
-        with self.assertLogs(
-            logger='driver.rest_client',
-            level='ERROR'
-        ) as cm:
-            with self.assertRaises(UnknownResultException) as ctx:
-                self.client.get_drivers()
-        
-        self.assertIsNone(ctx.exception.response)
-        self.assertIn(
             'Read time out to Drivers API',
             cm.output[0].split('\\n')[0]
         )
