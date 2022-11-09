@@ -18,12 +18,16 @@ class NearDrivers(APIView):
             },
         tags=['Drivers'],
     )
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
         serializer_context = {
             'request': request,
         }
+        data = {
+            'point':request.query_params.get('point'),
+            'date':request.query_params.get('date')
+        }
 
-        serializer = NearDriverSerializerRequest(data=request.data)
+        serializer = NearDriverSerializerRequest(data=data)
 
         if not serializer.is_valid():
             return Response(
