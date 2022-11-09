@@ -1,5 +1,4 @@
 import logging
-import math
 
 from django.conf import settings
 from driver.rest_client import RestClient
@@ -30,30 +29,20 @@ class DriverService():
             Driver.objects.get_or_create(
                 id=driver.get("id"),
                 defaults={
-                    'lat': driver.get('lat', 0),
-                    'lng': driver.get('lng', 0),
+                    'lat': int(driver.get('lat', 0)),
+                    'lng': int(driver.get('lng', 0)),
                     'last_update': driver.get('lastUpdate')
                 }
             )
 
     def get_nearest_driver(
         self,
-        lat_origin, long_origin,
-        lat_limit, long_limit,
-        date
+        point, date
     ):
-
-        radius = self.point_distance(
-            lat_origin, long_origin,
-            lat_limit, long_limit
-        )
         return Driver.objects.filter(
-            lat__lte=radius,
-            lng__lte=radius,
+            lat__range=(point, point * 2),
+            lng__range=(point, point * 2),
             last_update=date
-        )
+        ).order_by('lng', 'lat')
     
-    def point_distance(self, x1, y1, x2, y2):
-        radius = math.sqrt((y2-y1)**2 + (x2-x1)**2)
-        return radius
             

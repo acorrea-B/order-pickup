@@ -1,22 +1,17 @@
 from django.db import models
+from django.core.validators import MaxValueValidator
 
 class Driver(models.Model):
 
     id = models.BigAutoField(
         primary_key=True
     )
-    lat = models.DecimalField(
-        max_digits=22,
-        decimal_places=16,
-        blank=True,
-        null=True,
+    lat = models.PositiveIntegerField(
+        validators=[MaxValueValidator(100)],
         help_text = "location latitude Driver"
     )
-    lng = models.DecimalField(
-        max_digits=22,
-        decimal_places=16,
-        blank=True,
-        null=True,
+    lng = models.PositiveIntegerField(
+        validators=[MaxValueValidator(100)],
         help_text = "location longitude Driver"
     )
     last_update = models.DateTimeField()

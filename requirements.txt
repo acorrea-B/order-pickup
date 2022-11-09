@@ -5,3 +5,5 @@ requests-mock==1.10.0
 celery==5.2.7
 redis==4.3.4
 psycopg2-binary==2.9.3
+djangorestframework==3.14.0
+drf_yasg==1.21.4

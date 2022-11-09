@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'drf_yasg',
     'driver',
 
 ]
@@ -136,4 +138,4 @@ DRIVERS_API_CONFIG = {
 CELERY_BROKER_URL='redis://redis:6379/0'
 CELERY_RESULT_BACKEND='redis://redis:6379/0'
 
-CELERY_IMPORTS = ("tasks",)
+
