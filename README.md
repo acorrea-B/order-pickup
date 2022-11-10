@@ -23,6 +23,8 @@ To deploy this project run
 ```
 ## API
 
+This API run in local, make sure you have up the environment
+
 [Host](http://localhost:8000/api/v1)
 
 
