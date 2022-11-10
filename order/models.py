@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator
 from driver.models import Driver
 
 class Order(models.Model):
-    id = models.BigAutoField(
+    id = models.AutoField(
         primary_key=True
     )
     creation_date=models.DateTimeField(
