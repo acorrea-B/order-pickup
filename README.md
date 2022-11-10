@@ -23,7 +23,7 @@ To deploy this project run
 ```
 ## API
 
-[Host](localhost:8000/api/v1)
+[Host](http://localhost:8000/api/v1)
 
 
 
