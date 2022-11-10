@@ -1,4 +1,3 @@
-import driver
 from rest_framework import serializers
 from driver.models import  Driver
 

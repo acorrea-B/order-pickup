@@ -1,8 +1,10 @@
 import logging
+import datetime
 
 from django.conf import settings
 from driver.rest_client import RestClient
 from driver.models import Driver
+from order.services import OrderService
 
 class DriverService():
 
@@ -38,11 +40,13 @@ class DriverService():
     def get_nearest_driver(
         self,
         point, date
-    ):
+    ):  
+        orders = OrderService().get_orders_by_hour(date)
         return Driver.objects.filter(
             lat__range=(point, point * 2),
             lng__range=(point, point * 2),
-            last_update=date
-        ).order_by('lng', 'lat')
+        ).order_by('lng', 'lat').exclude(
+            id__in=[item.id for item in orders]
+        )
     
             

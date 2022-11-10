@@ -96,27 +96,17 @@ class ServicesTestCase(TestCase):
 
     @vcr.use_cassette()
     def test_get_nearest_driver_with_existent_date(self):
-        date = "2021-12-10T10:00:00.00"
+        
         DriverService().update_or_create_drivers()
-
-        number_drivers_by_date = Driver.objects.filter(
-            last_update=date
-        )
+        
+        date = "2021-12-10T10:00:00Z"
         point = 10
         result = DriverService().get_nearest_driver(
-            point=point , date=date
+            point=point, date=date
         )
         self.assertGreater(
             result.count(),
             2
-        )
-        self.assertNotEquals(
-            result.count(),
-            number_drivers_by_date.count()
-        )
-        self.assertLess(
-            result.count(),
-            number_drivers_by_date.count()
         )
 
         for item in result:
@@ -136,29 +126,12 @@ class ServicesTestCase(TestCase):
                 item.lng,
                 point * 2
             )
-            self.assertEquals(
-                datetime.datetime.strptime(date, '%Y-%m-%dT%H:%M:%S.%f%z'),
-                item.last_update
-            )
-    
-    def test_get_nearest_driver_with_no_existent_date(self):
-        date = "2021-12-11T00:00:00.000Z"
-        number_drivers_by_date = Driver.objects.filter(
-            last_update=date
-        )
-        result = DriverService().get_nearest_driver(
-            1, date
-        )
-        
-        self.assertEqual(
-            result.count(),
-            number_drivers_by_date.count()
-        )
     
     def test_get_nearest_driver_with_no_near_drivers(self):
-        date = "2021-12-11T00:00:00.000Z"
+        date = "2021-12-09T00:00:00Z"
+        point = 100 
         result = DriverService().get_nearest_driver(
-            100, date
+            point, date
         )
         
         self.assertEqual(

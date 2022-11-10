@@ -1,4 +1,3 @@
-from multiprocessing import context
 from driver.serializers import NearDriverSerializerResponse 
 from driver.serializers import NearDriverSerializerRequest
 from driver.services import DriverService
